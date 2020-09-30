@@ -1,0 +1,25 @@
+.menu {
+  width: 100%;
+  height: 100px;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.menuContainer {
+  width: 50%;
+  height: 100px;
+  position: absolute;
+}
+
+.menuLogo {
+  object-fit: contain;
+  position: relative;
+  top: 35%;
+  left: 0;
+}
+
+.menuLink {
+  position: relative;
+  top: 30%;
+  margin-left: 32px;
+}
