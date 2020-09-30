@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const sql = require('mssql');
 const app = express();
+const mysql = require('mysql');
+const port = process.env.PORT || 3001;
+
 
 app.use(bodyParser.json());
 
@@ -12,47 +14,36 @@ app.use(function (req, res, next) {
     next();
 });
 
-const server = app.listen(process.env.PORT || 3001, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
+
+const connection = mysql.createConnection({
+  host     : 'f80b6byii2vwv8cx.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
+  user     : 'ak75mqu8o6dg5hsj',
+  password : 'd875a0fdcd4l48no',
+  database : 'd7vsq6ucydllsz9e',
+  port     : 3306
 });
 
-const dbConfig = {
-    user: "utphgy1bohgicxve",
-    password: "siecr73bnoi3gbvg",
-    server: "q2gen47hi68k1yrb.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
-    database: "csqg7akfkmtq12rr"
-}
+connection.connect((err) => {
+    if(err) throw err;
+    console.log('Connected to MySQL Server!');
+});
 
-const executeQuery = function (res, query) {
-    sql.connect(dbConfig, function (err) {
-        if (err) {
-            console.log(err);
-            res.send(err);
-        }
-        else {
-            // create Request object
-            var request = new sql.Request();
-            // query to the database
-            request.query(query, function (err, result) {
-                if (err) {
-                    console.log(err);
-                    res.send(err);
-                }
-                else {
-                    res.send(result);
-                }
-            });
-        }
+app.get("/api/getTemperatures",(req,res) => {
+    connection.query('SELECT * from temperatures LIMIT 1', (err, rows) => {
+        if(err) throw err;
+        console.log('The data from users table are: \n', rows);
     });
-}
+});
 
-app.get("/api/getTemperatures", function (req, res) {
-    var query = "SELECT * FROM temperatures";
-    executeQuery(res, query);
-})
+app.post("/api/insertTemperature",(req,res) => {
+    var temperature = req.body.temperature
+    var month = req.body.month
+    connection.query('INSERT INTO temperatures (temperature, month) VALUES (' + temperature + ', ' + month + ')', (err, rows) => {
+        if(err) throw err;
+        console.log('Data inserted', rows);
+    });
+});
 
-app.post("/api/insertTemperature", function (req, res) {
-    var query = "INSERT INTO temperatures (temperature, month) VALUES (1, 2)";
-    executeQuery(res, query);
-})
+app.listen(port, () => {
+    console.log('Server is running at port ' + port);
+});

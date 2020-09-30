@@ -4,9 +4,17 @@
 }
 
 .temperatureForm {
-  width: 200px;
+  width: 500px;
+  height:100%;
   margin-left: auto;
   margin-right: auto;
+  display: inline-block;
+  
+}
+
+.temperatureTextFieldContainer {
+  position: relative;
+  width: 100%;
 }
 
 .temperatureSubmitButton {
@@ -18,3 +26,4 @@
 .temperatureMonth {
 
 }
+

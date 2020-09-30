@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from '../../assets/images/logo.svg';
 import './Graph.scss';
-import Menu from '../../components/menu/Menu';
+import Menu from '../../components/Menu/Menu';
 
 function App() {
   return (
