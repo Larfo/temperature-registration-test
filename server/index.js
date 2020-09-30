@@ -29,9 +29,9 @@ connection.connect((err) => {
 });
 
 app.get("/api/getTemperatures",(req,res) => {
-    connection.query('SELECT * from temperatures LIMIT 1', (err, rows) => {
+    connection.query('SELECT * from temperatures', (err, rows) => {
         if(err) throw err;
-        console.log('The data from users table are: \n', rows);
+        res.send(JSON.stringify(rows))
     });
 });
 

@@ -1,5 +1,6 @@
 import january from '../images/months/january.jpg';
 import february from '../images/months/february.jpg';
+import march from '../images/months/march.jpg';
 
 import placeholder from '../images/months/february.jpg';
 
@@ -17,7 +18,7 @@ var tileData = [
     },
     {
       id: 2, 
-      img: placeholder,
+      img: march,
       title: 'Mars',
     },
     {
