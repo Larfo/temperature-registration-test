@@ -9,7 +9,7 @@ class TemperatureComponent extends Component {
 
     this.state = {
       temperature: 0,
-      month: -1
+      monthId: -1
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,7 +20,7 @@ class TemperatureComponent extends Component {
 
   handleSelectMonth(monthId, monthTitle) {
     this.setState({ 
-      monthId,
+      monthId: monthId,
       monthHelperText: "Du har valgt " + monthTitle
     });
   }
@@ -48,9 +48,12 @@ class TemperatureComponent extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           temperature: this.state.temperature,
-          month: this.state.month
+          monthId: this.state.monthId
         })
       };
+
+      console.log("SENDING " + this.state.monthId)
+
       fetch(`/api/insertTemperature`, requestOptions)
         .then(response => response.json())
         .then(state => this.setState(state));
@@ -65,7 +68,7 @@ class TemperatureComponent extends Component {
 
   
   validMonth() {
-    if(this.state.month > 0)
+    if(this.state.monthId > 0)
       return true
     return false
   }

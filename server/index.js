@@ -37,8 +37,8 @@ app.get("/api/getTemperatures",(req,res) => {
 
 app.post("/api/insertTemperature",(req,res) => {
     var temperature = req.body.temperature
-    var month = req.body.month
-    connection.query('INSERT INTO temperatures (temperature, month) VALUES (' + temperature + ', ' + month + ')', (err, rows) => {
+    var monthId = req.body.monthId
+    connection.query('INSERT INTO temperatures (temperature, month) VALUES (' + temperature + ', ' + monthId + ')', (err, rows) => {
         if(err) throw err;
         console.log('Data inserted', rows);
     });

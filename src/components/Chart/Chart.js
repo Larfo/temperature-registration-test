@@ -10,18 +10,16 @@ class Chart extends Component {
 		super(props);
 		this.state = {
 		  dataPoints: [],
-		  isLoading: false
+		  isLoading: true
 		}
 	  }
 	
-	  componentDidMount() {
+	componentDidMount() {
 		this.fetchData()
 	}	
 
     render() {
-
 		var { dataPoints } = this.state
-
 		const options = {
 			title: {
 				text: "Registrerte tempertaurer"
@@ -50,13 +48,11 @@ fetchData() {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     };
-	console.log("hei")
 	fetch(`/api/getTemperatures`, requestOptions)
       	.then(response => response.json())
-        .then(dataPoints => this.setState({dataPoints: converter(dataPoints), isLoading: true}));
+        .then(dataPoints => this.setState({dataPoints: converter(dataPoints), isLoading: false}));
 
 	}
-	
 }
 
 export default Chart;

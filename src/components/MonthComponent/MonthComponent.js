@@ -21,7 +21,10 @@ class MonthComponent extends Component {
           {tileData.map(tile => (
             <GridListTile key={tile.title} onClick={() => this.selectMonth(tile.id, tile.title)}>
               <img src={tile.img} alt={tile.title} />
-              <GridListTileBar title={tile.title}/></GridListTile>
+              <GridListTileBar 
+                title={tile.title}
+              />
+            </GridListTile>
           ))}
         </GridList>
 			</div>

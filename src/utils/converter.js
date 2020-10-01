@@ -1,14 +1,11 @@
 import months from '../assets/content/months';
 
 function converter(dataItem) {
-    
-    const dataPoints = Object.keys(dataItem).map(index => {
+    return Object.keys(dataItem).map(index => {
         const temperature = dataItem[index].temperature
-        const month = dataItem[index].month
-        return { label: getMonthById(month), y: temperature }
-    })
-
-    return dataPoints;
+        const monthId = dataItem[index].month
+        return { label: getMonthById(monthId), y: temperature, monthId: monthId }
+    }).sort((a, b) => a.monthId - b.monthId)
 };
     
 function getMonthById(monthId) {
